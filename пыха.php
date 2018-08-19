@@ -1,3 +1,3 @@
-<?php echo "хелоу ворлд"; 
-echo"qwwerty";
+<?php echo "хелоу ворлд koban"; 
+echo"qwwerty ";
 ?>
