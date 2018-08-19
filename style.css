@@ -31,14 +31,21 @@ header{
     cursor: url(Crosshair.cur), pointer;
     position: relative;
 }
+.duckRofl{
+    background-image: url(duckRofl.png);
+    background-size: 100% 100%;
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    display:none;
+}
 
 .missImg{
     width: 50px;
     height: 50px;
     display: none;
-  top: 0px;
-  left: 0px;
-
+    top: 0px;
+    left: 0px;
     position: absolute;
     background-image: url(missImg.png);
     background-size: 100% 100%;
@@ -51,7 +58,7 @@ header{
     width: 200px;
     height: 200px;
     display: none;
-    position: relative;
+    position: absolute;
     top: 0px;
     left: 0px;
     /* transition: left 1s, top 1s; */

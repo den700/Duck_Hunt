@@ -9,6 +9,7 @@ var specialLvl=5;//уровни после 11
 var duck_speed=1000;//милесекунды между которыми утка меняет положение
 var protector=1;//защита от проигрыша по патронам
 var ammunitionProtector=1; //защита подстрела мертвой утки
+var duckRoflProtector = false;// пока фолс можно вызвать бонус
 var money=11200;//текущие деньги
 var moneyPrize=0;//назначенная награда за уровень
 var continueGame = 0; //возможность продолжения по сле проигрыша
@@ -20,6 +21,7 @@ var WeaponDamage = 1;//урон оружия
 var upgradeDamageResolution = 3;// насколько можно повысить урон
 var youDied = true;//запрещает клацать на экран если вы мертвы
 var maxAmmunition = 3;//максимум патронов ограничено 36
+
 
 var soundShot = new Audio(); //переменная звука для выстрелов
 var soundBack = new Audio(); //переменная звука заставка
@@ -116,6 +118,68 @@ function DuckPositionInSpace(){
     if(randPositionDuck%3==0){//с вероятность 33% утка крякнет
         playSoundDuckQuack("DuckQuack.mp3"); 
     }
+    
+   
+    
+    if(randPositionDuck%2==0&&duckRoflProtector==false){//c вероятностью 25% при премещении вылезет бонус
+        duckRoflProtector = true;
+        setTimeout("duckRoflProtector = false", 1100);
+        var randSide = Math.floor(Math.random() * (5 - 1)) + 1;
+        switch(randSide){
+
+        case 1://правая утка
+            var randPosRofl = Math.floor(Math.random() * (621 - 0)) + 0;
+            $(".duckRofl").css("transform", "scale(1,1)");
+            $(".duckRofl").css("top", randPosRofl+"px");//0- 620
+            $(".duckRofl").css("left", "1728px");// утку не видно на таком позиционировании 1728
+            $(".duckRofl").show();
+            $(".duckRofl").animate({left: "-=200"}, 1000).animate({ left: "+=200"}, 1000);
+        break;
+        case 2://левая утка
+            var randPosRofl = Math.floor(Math.random() * (621 - 0)) + 0;
+            $(".duckRofl").css("transform", "scale(-1,1)");
+            $(".duckRofl").css("top", randPosRofl+"px");//0- 620
+            $(".duckRofl").css("left", "-200px");// -200
+            $(".duckRofl").show();
+            $(".duckRofl").animate({left: "+=200"}, 1000).animate({ left: "-=200"}, 1000);
+        break;
+        case 3:// утка сверху
+            var randPosRofl = Math.floor(Math.random() * (1531 - 0)) + 0;
+            $(".duckRofl").css("transform", "scale(-1, -1)");// отразить по оси игрек
+            $(".duckRofl").css("top", "-200px");// 200
+            $(".duckRofl").css("left", randPosRofl+"px");// 0-1530
+            $(".duckRofl").show();
+            $(".duckRofl").animate({top: "+=200"}, 1000).animate({ top: "-=200"}, 1000);
+        break;
+        case 4:// утка снизу
+            var randPosRofl = Math.floor(Math.random() * (1530 - 0)) + 0;
+            $(".duckRofl").css("transform", "scale(1, 1)");// отразить по оси игрек
+            $(".duckRofl").css("top", "820px");// 200
+            $(".duckRofl").css("left", randPosRofl+"px");// 0-1530
+            $(".duckRofl").show();
+            $(".duckRofl").animate({top: "-=200"}, 1000).animate({ top: "+=200"}, 1000);
+        break;
+        }//конец свитч
+    }//кнец скрипт бонус утка
+    
+    
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 //таймер
@@ -151,6 +215,7 @@ function Miss(event){
     $(".missImg").stop();// без двойного стопа анимация не отменяется
     $(".missImg").fadeIn();
     $(".missImg").fadeOut(500);
+
  // условие поражения по патронам   
     if(ammunition<=0){
     // alert("game over"); 
