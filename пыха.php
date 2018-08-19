@@ -1,1 +1,3 @@
-<?php echo "хелоу ворлд"; ?>
+<?php echo "хелоу ворлд"; 
+echo"qwwerty";
+?>
