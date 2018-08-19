@@ -1,7 +1,7 @@
 //утка кидется предметами лефт премета = лефт утки 
 // пауза в игре\продолжить\рекорды
- var PositionLeft=0;//макс лефт 1540   
- var PositionTop=0; //620
+var PositionLeft=0;//макс лефт 1540   
+var PositionTop=0; //620
 var ammunition =0;//макс знач 36
 var timer_last=20;//секунд до поражения
 var lvl=1; //текущий уровень
@@ -20,7 +20,7 @@ var WeaponDamage = 1;//урон оружия
 var upgradeDamageResolution = 3;// насколько можно повысить урон
 var youDied = true;//запрещает клацать на экран если вы мертвы
 var maxAmmunition = 3;//максимум патронов ограничено 36
-var porosia;
+
 var soundShot = new Audio(); //переменная звука для выстрелов
 var soundBack = new Audio(); //переменная звука заставка
 var soundDuckQuack = new Audio(); //переменная звука кря утки
