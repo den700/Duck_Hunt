@@ -267,6 +267,20 @@ function gameOver(){
     $(".start").show(1000);
 }
 //магазинные товары\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\shop
+function buyUpgradeDamageResolution(){
+    if(money>=1500){
+        if(upgradeDamageResolution>=20){//
+            alert("вы достигли вершин науки, больше апгрейдить нельзя");
+            return;
+        }
+        upgradeDamageResolution++;
+        money-=1500;
+        $(".money span").html(money);
+        playSoundShot("Perfect.mp3");
+    }
+    else{alert("вы нищий, нужно $1500");}
+}
+
 function buyMaxAmmunition(){
     if(money>=50){
         if(maxAmmunition>=36){alert("пояс не вмещает больше 36 патронов"); return;}
