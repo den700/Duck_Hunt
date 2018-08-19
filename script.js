@@ -121,9 +121,10 @@ function DuckPositionInSpace(){
     
    
     
-    if(randPositionDuck%2==0&&duckRoflProtector==false){//c вероятностью 25% при премещении вылезет бонус
+    if(randPositionDuck%10==0&&duckRoflProtector==false){//c вероятностью 25% при премещении вылезет бонус
+        playSoundBack("tosty.mp3");
         duckRoflProtector = true;
-        setTimeout("duckRoflProtector = false", 1100);
+        setTimeout("duckRoflProtector = false", 2000);
         var randSide = Math.floor(Math.random() * (5 - 1)) + 1;
         switch(randSide){
 
