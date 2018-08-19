@@ -9,7 +9,7 @@ var specialLvl=5;//уровни после 11
 var duck_speed=1000;//милесекунды между которыми утка меняет положение
 var protector=1;//защита от проигрыша по патронам
 var ammunitionProtector=1; //защита подстрела мертвой утки
-var money=11500;//текущие деньги
+var money=11200;//текущие деньги
 var moneyPrize=0;//назначенная награда за уровень
 var continueGame = 0; //возможность продолжения по сле проигрыша
 var clickTrigger = "click"; //тип нажатия ниначто не влият просто тип оружия для проверки
@@ -140,23 +140,24 @@ function Miss(event){
     var x = $(".patron").length;
     var patronBlock = $(".patron")[x-1];
     $(patronBlock).removeClass("patron");
+// анимация промаха
+    var contentPosition = $(".content").offset(); //вычислить положение блока
+    var truePositionX = (event.pageX - contentPosition.left - 26); //26 половина блока с картинкой
+    var truePositionY = (event.pageY - contentPosition.top - 26);
+
+    $(".missImg").stop();//остановить незаконченную анимацию
+    $(".missImg").css("left", truePositionX+"px");
+    $(".missImg").css("top", truePositionY+"px");
+    $(".missImg").stop();// без двойного стопа анимация не отменяется
+    $(".missImg").fadeIn();
+    $(".missImg").fadeOut(500);
+ // условие поражения по патронам   
     if(ammunition<=0){
     // alert("game over"); 
     gameOver(); //гейм овер
     }
 
 }
-// тест отмена правой кнопки
-// $(".content").bind("contextmenu", DuckKill2);
-// function DuckKill2(event){ 
-//     var e = event || window.event;
-//       e.preventDefault && e.preventDefault();
-//       e.stopPropagation && e.stopPropagation();
-//       e.cancelBubble = true;
-//       e.returnValue = false;
-//       return false;
-// }
-
 //  клик по утке
 $(".utochka").bind("click", DuckKill,);
 //победа
