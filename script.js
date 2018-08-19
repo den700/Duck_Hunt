@@ -20,7 +20,7 @@ var WeaponDamage = 1;//урон оружия
 var upgradeDamageResolution = 3;// насколько можно повысить урон
 var youDied = true;//запрещает клацать на экран если вы мертвы
 var maxAmmunition = 3;//максимум патронов ограничено 36
-
+var porosia;
 var soundShot = new Audio(); //переменная звука для выстрелов
 var soundBack = new Audio(); //переменная звука заставка
 var soundDuckQuack = new Audio(); //переменная звука кря утки
