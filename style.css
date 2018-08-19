@@ -1,0 +1,186 @@
+#wrapper{
+    min-height: calc(100vh - 60px);
+}
+#header_main{
+    width: 100%;
+    height: 60px;
+    background: #57b3ff;
+    /* background: linear-gradient(to left, #00ff4d,#00aeff ); */
+}
+header{
+    margin: auto;
+    /* min-width: calc(100vw - 0px); */
+    width: 100%;
+    height: 60px;
+}
+#futer_main{
+    width: 100%;
+    height: 60px;
+    background: #008e02;
+    /* background: linear-gradient(to left, #426dfc,#d049f5 ); */
+}
+.content{
+    border: solid rgb(0, 83, 7) 2px; 
+    float: left;
+    width:90%;
+    min-height: calc(86.9vh - 0px);
+    background-image: url(1.jpg);
+    background-repeat: no-repeat;
+    background-size:90vw 86.9vh;
+    overflow: hidden;
+    cursor: url(Crosshair.cur), pointer;
+    position: relative;
+}
+
+.utochka{
+    background-image: url(utka.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 200px;
+    height: 200px;
+    display: none;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    /* transition: left 1s, top 1s; */
+    transform: scaleX(1);
+    border-radius: 50%;
+    /* border: solid black  1px; */
+}
+.startDiv{
+    height: 28px;
+    width: 100%;
+    border-top: solid rgb(0, 83, 7) 2px;
+    border-bottom: solid rgb(0, 83, 7) 2px;
+    box-sizing: border-box;
+}
+.start{
+    border-radius: 10px;
+}
+.inventory{
+    width: 100%;
+    height: 316px;
+    border-bottom: solid rgb(0, 83, 7) 2px;
+    box-sizing: border-box;
+}
+.patron{
+    float: left;
+    background-size: 28px 50px;
+    background-image: url(72.png);
+    width: 28px;
+    height: 50px;
+    border: solid black 1px;
+}
+
+.utochkaHpBlock{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 310px;
+    height: 50px;
+}
+
+.utochkaHp{
+    width: 25px;
+    height: 20px;
+    background-size: 25px 20px;
+    background-image: url(heart2.png);
+    float: right;
+    margin: 3px;
+
+}
+
+.information{
+    width: 100%;
+    height: 300px;
+    border-bottom: solid rgb(0, 83, 7) 2px;
+    box-sizing: border-box;  
+}
+.timer_center{
+    position: relative;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+}
+.ammo{
+  border-bottom: solid rgb(0, 83, 7) 1px;
+    text-align: center;
+}
+.thisLvlNumber, .nextLvlInfo, .money {
+    border-top: solid rgb(0, 83, 7) 1px;
+    text-align: center;
+}
+.thisLvlInfo{
+    border-top: solid rgb(0, 83, 7) 1px;
+    text-align: center;
+ display: none;
+}
+.shop{
+position: absolute;
+display: none;
+bottom: 25px;
+height: 530px;
+width: 100%;
+border-top: solid rgb(0, 83, 7) 2px;  
+background-color: rgba(83, 30, 0, 0.7);
+box-shadow: 0px 0px 31px 5px #000000 inset;
+/* overflow-y: scroll; */
+}
+.shop_shelf{
+height: 150px;
+width: 20%;
+float: left;
+border: solid black 1px; 
+box-sizing: border-box;
+position: relative;
+overflow: visible;
+/*z-index: 10;*/
+}
+.shop_shelf:hover{
+    box-shadow: 0px 0px 31px 5px #000000 inset;
+    /* z-index: 10;  */
+}
+.shop_shelf > img{
+    margin-top: 10px;
+    height: 130px;
+    width: 55%;
+    float: left; 
+}
+.shop_shelf > .description{
+height: 150px;
+width: 45%;
+float: left;
+box-sizing: border-box;
+padding-right: 5px;
+}
+.shop_shelf > button{
+    width: 100%;
+height: 25px;
+float: left;
+box-sizing: border-box;
+border: solid black 1px;
+z-index: 10;
+position: absolute ;
+border-radius: 0 0 10px 10px;
+
+box-shadow: 0px 0px 10px 1px #000000 inset; 
+top: -9999px;
+opacity: 0;
+transition: 1.4s opacity; 
+
+/*display: none;*/
+}
+.shop_shelf:hover button{
+   top: 149px;
+    /*transition: 1.4s opacity; */
+    /*display: block;*/
+ opacity: 1;
+}
+
+.shop_signboard{
+   /* margin-top:15px; */
+    text-align: center;
+font-size: 4em;
+    height: 80px;
+    width:100%;
+}
