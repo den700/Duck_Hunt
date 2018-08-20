@@ -120,7 +120,7 @@ function DuckPositionInSpace(){
     }
     
    
-    
+    //вылезет бонус утка
     if(randPositionDuck%10==0&&duckRoflProtector==false){//c вероятностью 25% при премещении вылезет бонус
         playSoundBack("tosty.mp3");
         duckRoflProtector = true;
@@ -211,9 +211,10 @@ function Miss(event){
     var truePositionY = (event.pageY - contentPosition.top - 26);
 
     $(".missImg").stop();//остановить незаконченную анимацию
+    $(".missImg").stop();// без двойного стопа анимация не отменяется
     $(".missImg").css("left", truePositionX+"px");
     $(".missImg").css("top", truePositionY+"px");
-    $(".missImg").stop();// без двойного стопа анимация не отменяется
+ 
     $(".missImg").fadeIn();
     $(".missImg").fadeOut(500);
 
