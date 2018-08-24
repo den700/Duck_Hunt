@@ -40,8 +40,8 @@ header{
     display:none;
 }
 .duckRoflBonus{
-    background-image: url(duckRoflRuletka.gif);
-    background-size: 100% 100%;
+   /* background-image: url(duckRoflRuletka.gif);
+    background-size: 100% 100%;*/
     position: absolute;
     height: 200px;
     width: 200px;

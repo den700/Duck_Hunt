@@ -126,10 +126,10 @@ function DuckPositionInSpace(){
 function timer_Hunt(){
 //вылезет бонус утка
     var randBonusChance = Math.floor(Math.random() * (2 - 1)) + 1; //от 1 до 15
-    if(randBonusChance==1&&duckRoflProtector==false){//c вероятностью 25% при премещении вылезет бонус
+    if(randBonusChance==10&&duckRoflProtector==false){//c вероятностью 25% при премещении вылезет бонус
         playSoundBack("tosty.mp3");
         duckRoflProtector = true;
-        setTimeout("duckRoflProtector = false", 4000);
+        setTimeout("duckRoflProtector = false", 3600);//сумарное на анимацию надо минимум 3600 
         var randSide = Math.floor(Math.random() * (5 - 1)) + 1;
         switch(randSide){
 
@@ -191,50 +191,50 @@ var randBonus = Math.floor(Math.random() * (5 - 1)) + 1;//получаем ра�
     $(".duckRoflBonus").show();
     $(".duckRoflBonus").css("top", BonusPosTop+"px");
     $(".duckRoflBonus").css("left", BonusPosLeft+"px");
-    $(".duckRoflBonus").css('background-image','url("duckRoflRuletka.gif")')
+    $(".duckRoflBonus").attr("src", "duckRoflRuletka.gif");
     playSoundShot("shot_gun.mp3");
     ammunition--;
     add_amunation();
     if(randBonus==1){//приз патроны
         randBonusAnimation=1;
-        setTimeout(duckRoflBonusEnd, 700);//800
+        setTimeout(duckRoflBonusEnd, 800);//800
 
     }
     if(randBonus==2){//приз время
         randBonusAnimation=2;
-        setTimeout(duckRoflBonusEnd, 900);
+        setTimeout(duckRoflBonusEnd, 1000);
 
 
     }
     if(randBonus==3){//приз конт
         randBonusAnimation=3;
-        setTimeout(duckRoflBonusEnd, 1100);
+        setTimeout(duckRoflBonusEnd, 1200);
 
     }
     if(randBonus==4){//приз деньги
         randBonusAnimation=4;
-        setTimeout(duckRoflBonusEnd, 1300);
+        setTimeout(duckRoflBonusEnd, 1400);
         
     }
 
 }
 
 function duckRoflBonusEnd(){
-    if(randBonusAnimation==1){$(".duckRoflBonus").css('background-image','url("duckRoflRuletka1.png")');
+    if(randBonusAnimation==1){$(".duckRoflBonus").attr("src", "duckRoflRuletka1.png");
         playSoundBack("DogShows.mp3");
         ammunition+=3;
         add_amunation();
     }
-    else if(randBonusAnimation==2){$(".duckRoflBonus").css('background-image','url("duckRoflRuletka2.png")');
+    else if(randBonusAnimation==2){$(".duckRoflBonus").attr("src", "duckRoflRuletka2.png");
         playSoundBack("DogShows.mp3");
         timer_last+=30;
         $(".timer_center").html("Таймер "+timer_last);
     }
-    else if(randBonusAnimation==3){$(".duckRoflBonus").css('background-image','url("duckRoflRuletka3.png")');
+    else if(randBonusAnimation==3){$(".duckRoflBonus").attr("src", "duckRoflRuletka3.png");
         playSoundBack("DogShows.mp3");
         continueGame ++;
     }
-    else if(randBonusAnimation==4){$(".duckRoflBonus").css('background-image','url("duckRoflRuletka4.png")');
+    else if(randBonusAnimation==4){$(".duckRoflBonus").attr("src", "duckRoflRuletka4.png");
         playSoundBack("DogShows.mp3");
         money+=300;
         $(".money span").html(money); 
