@@ -9,7 +9,6 @@ var specialLvl=5;//уровни после 11
 var duck_speed=1000;//милесекунды между которыми утка меняет положение
 var protector=1;//защита от проигрыша по патронам
 var ammunitionProtector=1; //защита подстрела мертвой утки
-var duckRoflProtector = false;// пока фолс можно вызвать бонус
 var money=20000;//текущие деньги
 var moneyPrize=0;//назначенная награда за уровень
 var continueGame = 0; //возможность продолжения по сле проигрыша
@@ -21,6 +20,8 @@ var WeaponDamage = 1;//урон оружия
 var upgradeDamageResolution = 3;// насколько можно повысить урон
 var youDied = true;//запрещает клацать на экран если вы мертвы
 var maxAmmunition = 3;//максимум патронов ограничено 36
+var duckRoflProtector = false;// пока фолс можно вызвать бонус
+var duckRoflProtectorClick = false;// пока фолс можно нажимать на бонус утку
 var BonusPosTop = 0;//позиционирование бонусной рулетки
 var BonusPosLeft = 0;//поз бонус релетки
 var randBonusAnimation=0;//тип картинки которая в конце рулетки
@@ -117,7 +118,7 @@ function DuckPositionInSpace(){
 
     PositionTop=randPositionDuck;
     $(".utochka").css("top", PositionTop+"px");
-    if(randPositionDuck%3==0){//с вероятность 33% утка крякнет
+    if(randPositionDuck%2==0){//с вероятность 50% утка крякнет
         playSoundDuckQuack("DuckQuack.mp3"); 
     }
 }
@@ -125,11 +126,11 @@ function DuckPositionInSpace(){
 //таймер
 function timer_Hunt(){
 //вылезет бонус утка
-    var randBonusChance = Math.floor(Math.random() * (2 - 1)) + 1; //от 1 до 15
-    if(randBonusChance==10&&duckRoflProtector==false){//c вероятностью 25% при премещении вылезет бонус
+    var randBonusChance = Math.floor(Math.random() * (11 - 1)) + 1; //от 1 до 15
+    if(randBonusChance==1&&duckRoflProtector==false){//c вероятностью 25% при премещении вылезет бонус
         playSoundBack("tosty.mp3");
         duckRoflProtector = true;
-        setTimeout("duckRoflProtector = false", 3600);//сумарное на анимацию надо минимум 3600 
+        setTimeout("duckRoflProtector = false", 4400);//сумарное на анимацию надо минимум 2800 
         var randSide = Math.floor(Math.random() * (5 - 1)) + 1;
         switch(randSide){
 
@@ -139,7 +140,7 @@ function timer_Hunt(){
             $(".duckRofl").css("top", randPosRofl+"px");//0- 620
             $(".duckRofl").css("left", "1728px");// утку не видно на таком позиционировании 1728
             $(".duckRofl").show();
-            $(".duckRofl").animate({left: "-=200"}, 1000).animate({ left: "+=200"}, 1000);//собственная анимация
+            $(".duckRofl").animate({left: "-=200"}, 700).animate({ left: "+=200"}, 700);//собственная анимация
             BonusPosTop = randPosRofl;//позиция для рулетки топ
             BonusPosLeft = 1528;//лефт
         break;
@@ -149,7 +150,7 @@ function timer_Hunt(){
             $(".duckRofl").css("top", randPosRofl+"px");//0- 620
             $(".duckRofl").css("left", "-200px");// -200
             $(".duckRofl").show();
-            $(".duckRofl").animate({left: "+=200"}, 1000).animate({ left: "-=200"}, 1000);
+            $(".duckRofl").animate({left: "+=200"}, 700).animate({ left: "-=200"}, 700);
             BonusPosTop = randPosRofl;//
             BonusPosLeft = 0;//
         break;
@@ -159,7 +160,7 @@ function timer_Hunt(){
             $(".duckRofl").css("top", "-200px");// 200
             $(".duckRofl").css("left", randPosRofl+"px");// 0-1530
             $(".duckRofl").show();
-            $(".duckRofl").animate({top: "+=200"}, 1000).animate({ top: "-=200"}, 1000);
+            $(".duckRofl").animate({top: "+=200"}, 700).animate({ top: "-=200"}, 700);
             BonusPosTop = 0;//
             BonusPosLeft = randPosRofl;//
         break;
@@ -169,7 +170,7 @@ function timer_Hunt(){
             $(".duckRofl").css("top", "820px");// 820
             $(".duckRofl").css("left", randPosRofl+"px");// 0-1530
             $(".duckRofl").show();
-            $(".duckRofl").animate({top: "-=200"}, 1000).animate({ top: "+=200"}, 1000);
+            $(".duckRofl").animate({top: "-=200"}, 700).animate({ top: "+=200"}, 700);
             BonusPosTop = 620;//
             BonusPosLeft = randPosRofl;//
         break;
@@ -187,6 +188,9 @@ function timer_Hunt(){
 //клик по бонус утке
 $(".duckRofl").bind("click", duckRoflBonus);
 function duckRoflBonus(){//переделать блок в имг чтоб гиф заново. или удалять дум хтмл а потом добавлять
+    // if(duckRoflProtectorClick==true){return;}//защита от дабл клика по утке
+    // setTimeout("duckRoflProtectorClick = false", 1600);
+    // duckRoflProtectorClick=true;//конец защита мэйби она не нужнат.к. приз ее загараживает и является не кликабельным
 var randBonus = Math.floor(Math.random() * (5 - 1)) + 1;//получаем рандомный из 4 бонус
     $(".duckRoflBonus").show();
     $(".duckRoflBonus").css("top", BonusPosTop+"px");
@@ -198,23 +202,18 @@ var randBonus = Math.floor(Math.random() * (5 - 1)) + 1;//получаем ра�
     if(randBonus==1){//приз патроны
         randBonusAnimation=1;
         setTimeout(duckRoflBonusEnd, 800);//800
-
     }
     if(randBonus==2){//приз время
         randBonusAnimation=2;
         setTimeout(duckRoflBonusEnd, 1000);
-
-
     }
     if(randBonus==3){//приз конт
         randBonusAnimation=3;
         setTimeout(duckRoflBonusEnd, 1200);
-
     }
     if(randBonus==4){//приз деньги
         randBonusAnimation=4;
         setTimeout(duckRoflBonusEnd, 1400);
-        
     }
 
 }
@@ -222,12 +221,12 @@ var randBonus = Math.floor(Math.random() * (5 - 1)) + 1;//получаем ра�
 function duckRoflBonusEnd(){
     if(randBonusAnimation==1){$(".duckRoflBonus").attr("src", "duckRoflRuletka1.png");
         playSoundBack("DogShows.mp3");
-        ammunition+=3;
+        ammunition+=4;
         add_amunation();
     }
     else if(randBonusAnimation==2){$(".duckRoflBonus").attr("src", "duckRoflRuletka2.png");
         playSoundBack("DogShows.mp3");
-        timer_last+=30;
+        timer_last+=40;
         $(".timer_center").html("Таймер "+timer_last);
     }
     else if(randBonusAnimation==3){$(".duckRoflBonus").attr("src", "duckRoflRuletka3.png");
@@ -240,7 +239,7 @@ function duckRoflBonusEnd(){
         $(".money span").html(money); 
     }
 
-    setTimeout("$('.duckRoflBonus').fadeOut(200)", 2000);
+    setTimeout("$('.duckRoflBonus').fadeOut(200)", 1600);
 }
 
 //клик по бэк промах
