@@ -31,6 +31,16 @@ header{
     cursor: url(Crosshair.cur), pointer;
     position: relative;
 }
+.dogShowDuck{
+    background-image: url(dog.png);
+    background-size: 100% 100%;
+    position: absolute;
+    height: 256px;
+    width: 256px;
+    display:none;
+    top: 820px;
+    left: 735px;
+}
 .duckRofl{
     background-image: url(duckRofl.png);
     background-size: 100% 100%;

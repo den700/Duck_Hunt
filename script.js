@@ -302,6 +302,7 @@ function DuckKill(event){
     setTimeout(duckFall, 1400);
     lvl++;
     ammunitionProtector=1; //запрет клика на утку(мертвую)
+    setTimeout('dogShowDuck();', 4100);//вылезет собака покажет утку
     //пауза в игре до клика начало
     clearInterval(timerHunt);
     clearInterval(DuckPosition);
@@ -328,6 +329,14 @@ function duckFall(){
     
 }
 
+//собака показывает утку при победе
+function dogShowDuck(){
+    $(".dogShowDuck").show();
+    $(".dogShowDuck").css("left", PositionLeft+"px");//вылезет под местом убиения утки
+    $(".dogShowDuck").animate({top: "-=240"}, 1500).animate({ top: "+=0"}, 500).animate({ top: "+=240"}, 1500).fadeOut();
+    playSoundDuckQuack("DogShows.mp3");
+
+}
 //порожение
 function gameOver(){
     if(continueGame>=1){//если есть континью не завершать игру
