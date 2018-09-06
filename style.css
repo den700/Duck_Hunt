@@ -79,8 +79,22 @@ header{
     /* transition: left 1s, top 1s; */
     transform: scaleX(1);
     border-radius: 50%;
-    /* border: solid black  1px; */
 }
+.utochka2{
+    background-image: url(utka.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 200px;
+    height: 200px;
+    display: none;
+    position: absolute;
+    top: 600px;
+    left: 0px;
+    /* transition: left 1s, top 1s; */
+    transform: scaleX(1);
+    border-radius: 50%;
+}
+
 .startDiv{
     height: 28px;
     width: 100%;
@@ -105,6 +119,13 @@ header{
     height: 50px;
     border: solid black 1px;
 }
+.emptyPatron{
+    float: left;
+    
+    width: 28px;
+    height: 50px;
+    border: solid black 1px;
+}
 
 .utochkaHpBlock{
     position: absolute;
@@ -112,6 +133,8 @@ header{
     top: 0px;
     width: 310px;
     height: 50px;
+    pointer-events:none;
+    /*прозрачен для кликов*/
 }
 
 .utochkaHp{
