@@ -94,6 +94,20 @@ header{
     transform: scaleX(1);
     border-radius: 50%;
 }
+.utochka3{
+    background-image: url(utka.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 200px;
+    height: 200px;
+    display: none;
+    position: absolute;
+    top: 300px;
+    left: 0px;
+    /* transition: left 1s, top 1s; */
+    transform: scaleX(1);
+    border-radius: 50%;
+}
 
 .startDiv{
     height: 28px;

@@ -1,19 +1,15 @@
-var PositionLeft=0;//макс лефт 1540   
-var PositionTop=0; //620
 var ammunition =0;//патроны макс знач 36
 var timer_last=20;//секунд до поражения
 var lvl=1; //текущий уровень
 var specialLvl=5;//уровни после 11
 var duck_speed=1000;//милесекунды между которыми утка меняет положение
 var protector=1;//защита от проигрыша по патронам в время открытого магазина
-var ammunitionProtector=1; //защита подстрела мертвой утки
 var money=20000;//текущие деньги
 var moneyPrize=0;//назначенная награда за уровень
 var continueGame = 0; //возможность продолжения по сле проигрыша сохранив апгрейды
 var clickTrigger = "click"; //тип нажатия ниначто не влият просто тип оружия для проверки
 var feedingUp = 0;// подкорм для уток увеличивает утку
 var slowingDuck = 0;//замедлить утку на 100 долисекунд
-var utochkaHp = 1;//покачто макс знач 10
 var WeaponDamage = 1;//урон оружия
 var upgradeDamageResolution = 3;// насколько можно повысить урон
 var youDied = true;//запрещает клацать на экран если вы мертвы
@@ -24,12 +20,23 @@ var BonusPosTop = 0;//позиционирование бонусной руле
 var BonusPosLeft = 0;//поз бонус релетки
 var randBonusAnimation=0;//тип картинки которая в конце рулетки
 var presenceDog = false;//наличие собаки
-
+//для утки 1
 var duckQuantity = 1;//количество уток
-var utochkaHpDuck2 = 1;//хп утки 2
+var PositionLeft=0;//макс лефт 1540   
+var PositionTop=0; //620
+var ammunitionProtector=1; //защита подстрела мертвой уткиъ
+var utochkaHp = 1;//покачто макс знач 10
+//для утки 2
 var PositionLeftDuck2=0;//макс лефт 1540   
 var PositionTopDuck2=0; //620
+var utochkaHpDuck2 = 1;//хп утки 2
 var ammunitionProtectorDuck2 = 1;//запрет клик на мертвую утку 2
+//для утки 3
+var PositionLeftDuck3=0;//макс лефт 1540   
+var PositionTopDuck3=0; //620
+var utochkaHpDuck3 = 1;//хп утки 2
+var ammunitionProtectorDuck3 = 1;//запрет клик на мертвую утку 2
+
 
 var soundShot = new Audio(); //переменная звука для выстрелов
 var soundBack = new Audio(); //переменная звука заставка
@@ -42,6 +49,7 @@ function StartGame() {
    // playSoundBack("intro.mp3");//музыка вступление интро не забыть раскоментить и мэйби убавить громкость
     ammunitionProtector=0;//защита подстрела мертвой утки снята
     ammunitionProtectorDuck2=0;//разрешить клик на утку 2
+    ammunitionProtectorDuck3=0;//разрешить клик на утку 3
     protector=0;//снять предохранитель
     youDied = false;//разрешение клацать на экран
 
@@ -79,7 +87,6 @@ function StartGame() {
         slowingDuck=0;
     }
     
-    
     $(".thisLvlInfo").show();
     $(".nextLvlInfo").hide();
     $(".shop").hide();//спрятать магазин
@@ -99,7 +106,20 @@ function StartGame() {
         }
 //замедляем утку хмелем
         if(slowingDuck>=1){
-            $(".utochka").css('transition',transitionString);//подставляем стринг в значение css
+            $(".utochka2").css('transition',transitionString);//подставляем стринг в значение css
+        }
+    }//конец вторая утка
+    if(duckQuantity>=3){//если утки 2
+        $(".utochka3").css('background-image','url("utka3.gif")');//назначить анимацию полета
+        $(".utochka3").show(1000); //показать утку
+//кормим утку два увеличивая ее
+        if(feedingUp>=1){
+            $(".utochka3").css('height',heightDuck+'px');
+            $(".utochka3").css('width',widthDuck+'px');
+        }
+//замедляем утку хмелем
+        if(slowingDuck>=1){
+            $(".utochka3").css('transition',transitionString);//подставляем стринг в значение css
         }
     }//конец вторая утка
 }
@@ -140,15 +160,17 @@ function DuckPositionInSpace(){
         PositionTop=randPositionDuck;
         $(".utochka").css("top", PositionTop+"px");
 
-        if(randPositionDuck%4==0){//с вероятность 50% утка крякнет
+        if(randPositionDuck%3==0){//с вероятность 50% утка крякнет
             playSoundDuckQuack("DuckQuack.mp3"); 
         }
     }
-// несколько ут
+// несколько уток
     if(duckQuantity>=2&&utochkaHpDuck2>=1){//если утки 2
         var randPositionDuck2 = Math.floor(Math.random() * (1541 - 0)) + 0;//горизонт поз
 
-$("header").html(randPositionDuck2+"пикс в право горизонт");//сделать чтоб отличалось на определенно значение скажем 50
+        while (randPositionDuck2-PositionLeftDuck2<300&&PositionLeftDuck2-randPositionDuck2<300) {//нужно фолс когда отличие 100 или бодьше
+            randPositionDuck2 = Math.floor(Math.random() * (1541 - 0)) + 0;
+        }
 
         if(PositionLeftDuck2>=randPositionDuck2){//направление носа утки в зависимости от движения
             $(".utochka2").css("transform", "scaleX(-1)");//нос в лево
@@ -168,11 +190,31 @@ $("header").html(randPositionDuck2+"пикс в право горизонт");//
     }
 
 
-else {//кряколка для уток
-        if(randBonusChance%2==0){//с вероятность 50% утка крякнет
-            playSoundDuckQuack("DuckQuack.mp3"); 
+    if(duckQuantity>=3&&utochkaHpDuck3>=1){//если утки 3
+        var randPositionDuck3 = Math.floor(Math.random() * (1541 - 0)) + 0;//горизонт поз
+
+        while (randPositionDuck3-PositionLeftDuck3<600&&PositionLeftDuck3-randPositionDuck3<600) {//нужно фолс когда отличие 100 или бодьше
+            randPositionDuck3 = Math.floor(Math.random() * (1541 - 0)) + 0;
+        }
+
+        if(PositionLeftDuck3>=randPositionDuck3){//направление носа утки в зависимости от движения
+            $(".utochka3").css("transform", "scaleX(-1)");//нос в лево
+        } else {
+            $(".utochka3").css("transform", "scaleX(1)");//нос в право
+        }
+        PositionLeftDuck3 = randPositionDuck3;
+        $(".utochka3").css("left", PositionLeftDuck3+"px");
+
+        randPositionDuck3 = Math.floor(Math.random() * (621 - 0)) + 0;//вертикаль поз
+        PositionTopDuck3=randPositionDuck3;
+        $(".utochka3").css("top", PositionTopDuck3+"px");
+
+        if(randPositionDuck3%5==0){//с вероятность 50% утка крякнет
+                playSoundDuckQuack("DuckQuack.mp3"); 
         }
     }
+
+
 }
 
 //таймер
@@ -311,7 +353,7 @@ function Miss(event){
     var truePositionY = (event.pageY - contentPosition.top - 26);
 
     $(".missImg").stop();//остановить незаконченную анимацию
-    $(".missImg").stop();// без двойного стопа анимация не отменяется
+    $(".missImg").stop();// без двойного стопа анимация не пропадает
     $(".missImg").css("left", truePositionX+"px");
     $(".missImg").css("top", truePositionY+"px");
  
@@ -356,7 +398,7 @@ function DuckKill(event){
     
     ammunitionProtector=1; //запрет клика на утку(мертвую)
     if(presenceDog==true){ setTimeout('dogShowDuck(1);', 4100);}//вылезет собака покажет утку
-    if(utochkaHpDuck2<=0&&utochkaHp<=0){completeVictory();}
+    if(utochkaHpDuck3<=0&&utochkaHpDuck2<=0&&utochkaHp<=0){completeVictory();}
 }
 
 //  клик по утке2
@@ -379,7 +421,7 @@ function DuckKill2(event){
         playSoundBack("shot2.mp3");//скомпилировать микс выстрел + кряк и звук дамага
         return;
     }
-    // $('.utochkaHpBlock').children().removeClass("utochkaHp");// очистить иконки сердечек
+    
     playSoundShot("shot_gun.mp3");//звук выстрела при убийстве и вук дамага при дмг
     ammunitionProtectorDuck2=1; //запрет клика на утку(мертвую)
     //анимация падения
@@ -387,8 +429,40 @@ function DuckKill2(event){
     setTimeout(duckFall2, 1400);
     
     if(presenceDog==true){ setTimeout('dogShowDuck(2);', 4100);}//вылезет собака покажет утку
-    if(utochkaHpDuck2<=0&&utochkaHp<=0){completeVictory();}
+    if(utochkaHpDuck3<=0&&utochkaHpDuck2<=0&&utochkaHp<=0){completeVictory();}
 }
+
+//  клик по утке3
+$(".utochka3").bind("click", DuckKill3,);
+//
+function DuckKill3(event){
+    if (ammunitionProtectorDuck3==1) {return} //запрет клика по мертвой утке
+    //забрать 1 патрон
+    if(ammunition<=0){//защита от убийства без патронов
+        gameOver();
+        return;
+    }
+    ammunition--; 
+    add_amunation();
+    // забрать хп утки
+    utochkaHpDuck3-=WeaponDamage;
+    if(utochkaHpDuck3>=1){//если хп у утки осталось то продолжить игру
+        showDuckHp();
+      
+        playSoundBack("shot2.mp3");//скомпилировать микс выстрел + кряк и звук дамага
+        return;
+    }
+ 
+    playSoundShot("shot_gun.mp3");//звук выстрела при убийстве и вук дамага при дмг
+    ammunitionProtectorDuck3=1; //запрет клика на утку(мертвую)
+    //анимация падения
+    $(".utochka3").css('background-image','url("duck_hit.png")');
+    setTimeout(duckFall3, 1400);
+    
+    if(presenceDog==true){ setTimeout('dogShowDuck(3);', 4100);}//вылезет собака покажет утку
+    if(utochkaHpDuck3<=0&&utochkaHpDuck2<=0&&utochkaHp<=0){completeVictory();}
+}
+
 
 //анимация падения
 function duckFall(){
@@ -407,6 +481,15 @@ function duckFall2(){
     $(".utochka2").css('background-image','url("duck_fall.gif")');
     $(".utochka2").css("top", "810px");
     setTimeout('$(".utochka2").hide();', 2000);
+}
+//анимация падения утки 3
+function duckFall3(){
+    playSoundDuckQuack("DuckFalls.mp3");
+
+    $(".utochka3").css('transition','left 2s, top 2s');
+    $(".utochka3").css('background-image','url("duck_fall.gif")');
+    $(".utochka3").css("top", "810px");
+    setTimeout('$(".utochka3").hide();', 2000);
 }
 //если убиты все утки полная победа
 function completeVictory(){
@@ -430,6 +513,7 @@ function dogShowDuck(duckNumber){
     $(".dogShowDuck").show();
     if(duckNumber==1){$(".dogShowDuck").css("left", PositionLeft+"px");}//вылезет под местом убиения утки
     if(duckNumber==2){$(".dogShowDuck").css("left", PositionLeftDuck2+"px");}//вылезет под местом убиения утки
+    if(duckNumber==3){$(".dogShowDuck").css("left", PositionLeftDuck3+"px");}//вылезет под местом убиения утки
     $(".dogShowDuck").animate({top: "-=240"}, 1500).animate({ top: "+=0"}, 500).animate({ top: "+=240"}, 1500).fadeOut();
     playSoundDuckQuack("DogShows.mp3");
     money+=50;
@@ -451,6 +535,7 @@ function gameOver(){
         protector=1; //поднять предохранитель
         $(".utochka").hide(3000); 
         $(".utochka2").hide(3000); 
+        $(".utochka3").hide(3000); 
         $(".start").show(1000);
         $(".shop").fadeIn(1000);
         return;
@@ -466,18 +551,27 @@ function gameOver(){
     if(clickTrigger=="dblclick"){
         $(".content").unbind('dblclick', Miss);
         $(".utochka").unbind('dblclick', DuckKill);
+        $(".utochka2").unbind('dblclick', DuckKill2);
+        $(".utochka3").unbind('dblclick', DuckKill3);
 
         $(".content").bind("click", Miss);
         $(".utochka").bind("click", DuckKill);
+        $(".utochka2").bind("click", DuckKill2);
+        $(".utochka3").bind("click", DuckKill3);
     }
     if(clickTrigger=="mousedown"){
         $(".content").unbind('mousedown', Miss);
         $(".utochka").unbind('mousedown', DuckKill);
+        $(".utochka2").unbind('mousedown', DuckKill2);
+        $(".utochka3").unbind('mousedown', DuckKill3);
 
         $(".content").bind("click", Miss);
         $(".utochka").bind("click", DuckKill);
+        $(".utochka2").bind("click", DuckKill2);
+        $(".utochka3").bind("click", DuckKill3);
     }
-   
+    clickTrigger = "click";
+
     ammunitionProtector = 1;
     youDied = true;
     lvl=1; 
@@ -485,6 +579,7 @@ function gameOver(){
     playSoundBack("Dog_Laughs.mp3");
     $(".utochka").hide(3000); 
     $(".utochka2").hide(3000); 
+    $(".utochka3").hide(3000); 
     clearInterval(timerHunt);
     clearInterval(DuckPosition);
     $(".start").show(1000);
@@ -546,13 +641,19 @@ function buyWunderwaffe(){
         if(clickTrigger=="mousedown"){
             $(".content").unbind('mousedown', Miss);
             $(".utochka").unbind('mousedown', DuckKill);
+            $(".utochka2").unbind('mousedown', DuckKill2);
+            $(".utochka3").unbind('mousedown', DuckKill3);
         }
         else{
             $(".content").unbind('click', Miss);
             $(".utochka").unbind('click', DuckKill);
+            $(".utochka2").unbind('click', DuckKill2);
+            $(".utochka3").unbind('click', DuckKill3);
         }
         $(".content").bind("dblclick", Miss);
         $(".utochka").bind("dblclick", DuckKill);
+        $(".utochka2").bind("dblclick", DuckKill2);
+        $(".utochka3").bind("dblclick", DuckKill3);
     }
     else{alert("вы нищий, нужно $1500");}
 }
@@ -580,13 +681,19 @@ function buyTrigger(){
         if(clickTrigger=="dblclick"){
             $(".content").unbind('dblclick', Miss);
             $(".utochka").unbind('dblclick', DuckKill);
+            $(".utochka2").unbind('dblclick', DuckKill2);
+            $(".utochka3").unbind('dblclick', DuckKill3);
         }
         else{
             $(".content").unbind('click', Miss);
             $(".utochka").unbind('click', DuckKill);
+            $(".utochka2").unbind('click', DuckKill2);
+            $(".utochka3").unbind('click', DuckKill3);
         }
         $(".content").bind("mousedown", Miss);
         $(".utochka").bind("mousedown", DuckKill);
+        $(".utochka2").bind("mousedown", DuckKill2);
+        $(".utochka3").bind("mousedown", DuckKill3);
         upgradeDamageResolution=1;
         WeaponDamage=1;
         clickTrigger = "mousedown";
@@ -661,15 +768,16 @@ function buyAmmunition(){//купить патрон
 function SelectLvl(){
     if(lvl==1){ //нет патронов
         duck_speed=2000;
-        $(".utochka, .utochka2").css('transition','left 2.0s, top 2.0s');
-        $(".utochka, .utochka2").css('height','200px');
-        $(".utochka, .utochka2").css('width','200px');
+        $(".utochka, .utochka2, .utochka3").css('transition','left 2.0s, top 2.0s');
+        $(".utochka, .utochka2, .utochka3").css('height','200px');
+        $(".utochka, .utochka2, .utochka3").css('width','200px');
         timer_last=30;
         ammunition=8;
         moneyPrize=50;
         utochkaHp=1;
         utochkaHpDuck2=1;
-        duckQuantity = 2;// две утки
+        utochkaHpDuck3=1;
+        duckQuantity = 3;// 3 утки
         $(".thisLvlNumber span").html("1");//номер уровня
         $(".thisLvlInfo span").html("береги патроны");
         $(".nextLvlInfo span").html("быстрая утка. таймер +5 патрон +2");
