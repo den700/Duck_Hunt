@@ -11,23 +11,61 @@
 <body>
 	<div id="wrapper" > 
 		<div id="header_main" >
-			<center><header></header></center>
+				<div class="middle_block">
+				<div class="moneyInfo"></div>
+				</div>
+		
+				<div class="utkiLifeBar">
+
+					<div class="utkaColorBlockMain">
+						<div class="utkaColorBlock utkaBlack"></div>
+						<div class="utkaColorBlock utkaBlue"></div>
+						<div class="utkaColorBlock utkaRed"></div>
+					</div>
+
+					<div class="utochkaHpBlock">
+						<!-- блоки для сердечек -->
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+		    		</div>
+					<div class="utochka2HpBlock">
+						<!-- блоки для сердечек -->
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+		    		</div>
+		    		<div class="utochka3HpBlock">
+						<!-- блоки для сердечек -->
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+						<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
+		    		</div>
+
+				</div>
+			
 		</div>
 
 		<div class="content">
+				<div class="choiceComplexity">
+					<div class="complexityDescription">Выберите уровень сложности</div>
+					<button onclick="choiceLevelComplexity('Easy')">Easy</button> 
+					<button onclick="choiceLevelComplexity('Middle')">Middle</button> 
+					<button onclick="choiceLevelComplexity('Ultra hardcore')">Ultra hardcore</button> 
+				</div>
+
 				<div class="dogShowDuck"></div>
 
 				<div class="duckRofl"></div>
 				<img class="duckRoflBonus" src="duckRoflRuletka.gif" >
 				
-				<div class="utochkaHpBlock">
-					<!-- блоки для сердечек -->
-					<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
-					<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
-					<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
-					<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
-					<div></div>    <div></div>    <div></div>    <div></div>    <div></div>
-		    	</div>
+				
 				
 				<div class="missImg"></div>
 
@@ -42,21 +80,15 @@
 						<img src="patron.png" alt="здесь бесконечные патроны">
 						<div class="description"><br>патроны это первое что понадобится вам для выживания цена $100</div>
 					</div>
-
+					<div class="shop_shelf">
+						<button onclick="buyMaxAmmunition()">купить место для патрона</button> 
+						<img src="maxAmmunition.png" alt="здесь бесконечные патроны">
+						<div class="description"><br>увеличит максимальное число патронов на 1, цена $50</div>
+					</div>
 					<div class="shop_shelf">
 						<button onclick="buyTime()">купить время</button>
 						<img src="license.png" alt="здесь бесконечные патроны">
 						<div class="description"><br>лицензия на отстрел гусей, по истечении таймера игра закончится цена $100 за 10сек.</div>
-					</div>
-					<div class="shop_shelf">
-						<button onclick="buyContinue()">купить продолжение</button> 
-						<img src="car.gif" alt="здесь бесконечные патроны">
-						<div class="description"><br>вернуться за припасами в экстренной ситуации, прихватив самое необходимое цена $500</div>
-					</div>
-					<div class="shop_shelf">
-						<button onclick="buyTrigger()">купить полуавтомат</button> 
-						<img src="auto.png" alt="здесь бесконечные патроны">
-						<div class="description"><br>плотность огня увеличится вдвое, урон 1 цена $1500</div>
 					</div>
 					<div class="shop_shelf">
 						<button onclick="buyFood()">купить прикорм</button> 
@@ -71,92 +103,116 @@
 					</div>
 					<div class="shop_shelf">
 						<button onclick="buyWeaponDamage()">купить урон</button> 
-						<img src="auto.png" alt="здесь бесконечные патроны">
-						<div class="description"><br>использование более качественных компонентов для оружия урон +1, цена $500</div>
-					</div>
-					<div class="shop_shelf">
-						<button onclick="buyWunderwaffe()">купить слонобой</button> 
-						<img src="auto.png" alt="здесь бесконечные патроны">
-						<div class="description"><br>медленное но убойное оружие,для стрельбы жмите дабл клик. урон 4 цена $1500</div>
-					</div>
-					<div class="shop_shelf">
-						<button onclick="buyMaxAmmunition()">купить место для патрона</button> 
-						<img src="auto.png" alt="здесь бесконечные патроны">
-						<div class="description"><br>увеличит максимальное число патронов на 1, цена $50</div>
+						<img src="upGradeWeapon.png" alt="здесь бесконечные патроны">
+						<div class="description"><br>использование более качественных компонентов для оружия урон +1, цена $750</div>
 					</div>
 					<div class="shop_shelf">
 						<button onclick="buyUpgradeDamageResolution()">купить технологии</button> 
-						<img src="auto.png" alt="здесь бесконечные патроны">
-						<div class="description"><br>увеличивает максимально возможный апгрейд, цена $1500</div>
+						<img src="science.png" alt="здесь бесконечные патроны">
+						<div class="description"><br>увеличивает максимально возможный апгрейд, цена $750</div>
+					</div>
+					<div class="shop_shelf">
+						<button onclick="buyTrigger()">купить полуавтомат</button> 
+						<img src="automat.png" alt="здесь бесконечные патроны">
+						<div class="description"><br>плотность огня увеличится вдвое,выстрел при нажатии ,а не при отпускани, урон 1 цена $750</div>
+					</div>
+					<div class="shop_shelf">
+						<button onclick="buyWunderwaffe()">купить слонобой</button> 
+						<img src="Wunderwaffe.png" alt="здесь бесконечные патроны">
+						<div class="description"><br>медленное но убойное оружие,для стрельбы жмите дабл клик. урон 4 цена $750</div>
+					</div>
+					<div class="shop_shelf">
+						<button onclick="buyStandartWeapon()">обычное ружьё</button> 
+						<img src="rifle.png" alt="здесь бесконечные патроны">
+						<div class="description"><br>стандартное оружие,возможный апгрейд 3, урон 1,вы потеряете предыдущее оружие и апгрейды, цена $0</div>
+					</div>
+	
+					<div class="shop_shelf">
+						<button onclick="buyContinue()">купить продолжение</button> 
+						<img src="car.gif" alt="здесь бесконечные патроны">
+						<div class="description"><br>вернуться за припасами в экстренной ситуации, прихватив самое необходимое цена $500</div>
 					</div>
 					<div class="shop_shelf">
 						<button onclick="buyDog()">купить собаку</button> 
 						<img src="buy_dog.png" alt="здесь бесконечные патроны">
 						<div class="description"><br>более качественная доставка уток,+50 денег за каждую, цена $500</div>
 					</div>
-					<div class="shop_shelf"></div>
-					<div class="shop_shelf"></div>
+					<div class="shop_shelf">
+						<button onclick="buyBackground()">купить новый фон</button> 
+						<img src="backgroundMiniShopImg.png" alt="здесь бесконечные патроны">
+						<div class="description"><br>сменить фон, цена $100</div>
+					</div>
+		
 					<div class="shop_shelf"></div>
 					<div class="shop_shelf"></div>
 					
 
 				</div>
 		</div>
+		<div class="infoWrapper">
+			<div class="startDiv">
+				<button class="start">Начать игру!</button>
+			</div>
+			<div class="ammo"> Патроны </div>
+			<div class="inventory">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
 
-		<div class="startDiv">
-			<button class="start">Начать игру!</button>
-		</div>
-		<div class="ammo"> Патроны </div>
-		<div class="inventory">
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
 
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
 
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
 
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
 
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
 
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
+			</div>
+			<div class="information">
+				<div class="timer_center">Таймер ~</div>
+				<div class="thisLvlNumber">уровень <br><span> 0 </span> </div>
+				<div class="money">деньги  <br><span> 0 </span> </div>
+				<div class="thisLvlInfo">подсказка <br><span> начинай! </span> </div>
+				<div class="nextLvlInfo">подсказка след. уровень <br><span>патронов дадут мало</span> </div>
+				<div class="upgradeInformation">
+					<div class="WeaponDamage">текущий урон <br><span> 1 </span> </div>
+					<div class="upgradeDamageResolution">макс. улучшение <br><span> 3 </span> </div>
+					<div class="additionalTime">доп.время <br><span> 0 </span> </div>	
+					<div class="feedingUp">прикорм <br><span> 0 </span> </div>
+					<div class="slowingDuck">припой <br><span> 0 </span> </div>	
 
-		</div>
-		<div class="information">
-			<div class="timer_center">Таймер ~</div>
-			<div class="thisLvlNumber">уровень <br><span> 0 </span> </div>
-			<div class="money">деньги  <br><span> 200 </span> </div>
-			<div class="thisLvlInfo">подсказка <br><span> начинай! </span> </div>
-			<div class="nextLvlInfo">подсказка след. уровень <br><span>патронов дадут мало</span> </div>
+				</div>
+			</div>
 		</div>
 
 
