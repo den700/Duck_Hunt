@@ -40,20 +40,10 @@ var PositionTopDuck3=0; //620
 var utochkaHpDuck3 = 1;//хп утки 2
 var ammunitionProtectorDuck3 = 1;//запрет клик на мертвую утку 2
 
-
 var soundShot = new Audio(); //переменная звука для выстрелов
 var soundBack = new Audio(); //переменная звука заставка
 var soundDuckQuack = new Audio(); //переменная звука кря утки
-
-
-// function funonload() {
-//     // playSoundShot("Title2.mp3");
-//     playSoundShot("shot_gun.mp3");
-// }
-// setTimeout(intro, 2000);
-// function intro(){
-//     playSoundShot("Title2.mp3");
-// }
+var soundTosty = new Audio(); //переменная звука бонус утки
 
 
 $(".start").bind("click",StartGame);
@@ -68,7 +58,7 @@ function StartGame() {
     SelectLvl();//выбор уровня сложности
     add_amunation();//добавить иконки патронов//показать пустые ячейки для патронов
     showDuckHp();//показать хп утки
-
+    if(lvl==1||lvl==100||lvl==1000){playSoundBack("intro.mp3"); }
     //доп вреся на уровень
     timer_last+=additionalTime;
     additionalTime=0;
@@ -198,10 +188,6 @@ function DuckPositionInSpace(){
         randPositionDuck = Math.floor(Math.random() * (621 - 0)) + 0;//вертикаль поз
         PositionTop=randPositionDuck;
         $(".utochka").css("top", PositionTop+"px");
-
-        // if(randPositionDuck%3==0){//с вероятность 50% утка крякнет
-        //     playSoundDuckQuack("DuckQuack.mp3"); 
-        // }
     }
 // несколько уток
     if(duckQuantity>=2&&utochkaHpDuck2>=1){//если утки 2
@@ -222,10 +208,6 @@ function DuckPositionInSpace(){
         randPositionDuck2 = Math.floor(Math.random() * (621 - 0)) + 0;//вертикаль поз
         PositionTopDuck2=randPositionDuck2;
         $(".utochka2").css("top", PositionTopDuck2+"px");
-
-        // if(randPositionDuck2%4==0){//с вероятность 50% утка крякнет
-        //         playSoundDuckQuack("DuckQuack.mp3"); 
-        // }
     }
 
 
@@ -247,10 +229,6 @@ function DuckPositionInSpace(){
         randPositionDuck3 = Math.floor(Math.random() * (621 - 0)) + 0;//вертикаль поз
         PositionTopDuck3=randPositionDuck3;
         $(".utochka3").css("top", PositionTopDuck3+"px");
-
-        // if(randPositionDuck3%5==0){//с вероятность 50% утка крякнет
-        //         playSoundDuckQuack("DuckQuack.mp3"); 
-        // }
     }
 
 
@@ -261,7 +239,7 @@ function timer_Hunt(){
 //вылезет бонус утка
     var randBonusChance = Math.floor(Math.random() * (11 - 1)) + 1; //от 1 до 15
     if(randBonusChance==1&&duckRoflProtector==false){//c вероятностью 25% при премещении вылезет бонус
-        playSoundBack("tosty.mp3");
+        playSoundTosty("tosty.mp3");
         duckRoflProtector = true;
         setTimeout("duckRoflProtector = false", 4400);//сумарное на анимацию надо минимум 2800 утка не вылезет 4400милисек
         var randSide = Math.floor(Math.random() * (5 - 1)) + 1;
@@ -418,10 +396,6 @@ function DuckKill(event){
     }
     ammunition--; 
     add_amunation();
-    // var patronIndex = $(".patron").length;//старый варик вместо адд амунишн удаляли последний
-    // var patronBlock = $(".patron")[patronIndex-1];
-    // $(patronBlock).removeClass("patron");
-    // забрать хп утки
     utochkaHp-=WeaponDamage;
     showDuckHp();
     if(utochkaHp>=1){//если хп у утки осталось то продолжить игру
@@ -634,7 +608,8 @@ function gameOver(){
     $(".utochka3").hide(3000); 
     clearInterval(timerHunt);
     clearInterval(DuckPosition);
-    $(".start").show(1000);
+    setTimeout("$('.start').show();", 3000);
+    
 }
 //магазинные товары\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\shop
 
@@ -1421,6 +1396,14 @@ function playSoundDuckQuack(url){
     soundDuckQuack.src = url;
     soundDuckQuack.play();
 }
+function playSoundTosty(url){
+    soundTosty.pause();
+    soundTosty.currentTime = 0;
+    soundTosty.src = url;
+    soundTosty.play();
+}
+
+//сложность
 function choiceLevelComplexity(choiceLevel){
     if(choiceLevel=="Easy"){
         lvl = 1000;
@@ -1438,5 +1421,5 @@ function choiceLevelComplexity(choiceLevel){
     }
     $(".choiceComplexity").fadeOut(500);
     $(".start").fadeIn(500);
-    playSoundBack("intro.mp3");//музыка вступление интро 
+    playSoundBack("Title2.mp3");//музыка вступление интро 
 }
