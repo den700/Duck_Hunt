@@ -984,10 +984,10 @@ function SelectLvl(){
         timer_last+=5;
         ammunition+=3;
         moneyPrize=500;
-        utochkaHp=1;
-        utochkaHpDuck2=1;
-        utochkaHpDuck3=1;
-        duckQuantity = 3;// две утки
+        utochkaHp=10;
+        utochkaHpDuck2=0;
+        utochkaHpDuck3=0;
+        duckQuantity = 1;// две утки
         $(".thisLvlNumber span").html(lvl);//номер уровня
         $(".thisLvlInfo span").html("жирная утка");
         $(".nextLvlInfo span").html("три утки ,таймер + 5,патроны + 10 если унесешь");
